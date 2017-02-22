@@ -100,9 +100,12 @@ public class LongListActivityTest {
      * Clicks on a row and checks that the activity detected the click.
      */
     @Test
-    public void row_Click() {
+    public void row_Click() throws InterruptedException {
         // Click on one of the rows.
+        Thread.sleep(1000);
         onRow(TEXT_ITEM_30).onChildView(withId(R.id.rowContentTextView)).perform(click());
+        // or onRow(TEXT_ITEM_30).perform(click());
+        Thread.sleep(1000);
 
         // Check that the activity detected the click on the first column.
         onView(ViewMatchers.withId(R.id.selection_row_value))
@@ -113,10 +116,10 @@ public class LongListActivityTest {
      * Checks that a toggle button is checked after clicking on it.
      */
     @Test
-    public void toggle_Click() {
+    public void toggle_Click() throws InterruptedException {
         // Click on a toggle button.
         onRow(TEXT_ITEM_30).onChildView(withId(R.id.rowToggleButton)).perform(click());
-
+        Thread.sleep(1000);
         // Check that the toggle button is checked.
         onRow(TEXT_ITEM_30).onChildView(withId(R.id.rowToggleButton)).check(matches(isChecked()));
     }
@@ -125,13 +128,14 @@ public class LongListActivityTest {
      * Make sure that clicking on the toggle button doesn't trigger a click on the row.
      */
     @Test
-    public void toggle_ClickDoesntPropagate() {
+    public void toggle_ClickDoesntPropagate() throws InterruptedException {
+        Thread.sleep(700);
         // Click on one of the rows.
         onRow(TEXT_ITEM_30).onChildView(withId(R.id.rowContentTextView)).perform(click());
-
+        Thread.sleep(700);
         // Click on the toggle button, in a different row.
         onRow(TEXT_ITEM_60).onChildView(withId(R.id.rowToggleButton)).perform(click());
-
+        Thread.sleep(700);
         // Check that the activity didn't detect the click on the first column.
         onView(ViewMatchers.withId(R.id.selection_row_value))
                 .check(matches(withText(TEXT_ITEM_30_SELECTED)));
