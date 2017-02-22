@@ -153,5 +153,7 @@ public class LongListActivityTest {
      */
     private static DataInteraction onRow(String str) {
         return onData(hasEntry(equalTo(LongListActivity.ROW_TEXT), is(str)));
+        // Custom mathcher: (but probably it would be better to use TypeSafeMatcher<Map<? extends K, ? extends V>> like has Entry above)
+//        return onData(CustomMatcher.hasEntry(LongListActivity.ROW_TEXT, is(str)));
     }
 }
