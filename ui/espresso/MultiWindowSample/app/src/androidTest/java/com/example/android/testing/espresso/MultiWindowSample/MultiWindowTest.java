@@ -92,11 +92,12 @@ public class MultiWindowTest {
     }
 
     @Test
-    public void autoCompleteTextView_twoSuggestions() {
+    public void autoCompleteTextView_twoSuggestions() throws InterruptedException {
         // Type "So" to trigger two suggestions.
+        Thread.sleep(500);
         onView(withId(R.id.auto_complete_text_view))
                 .perform(typeText("So"), closeSoftKeyboard());
-
+        Thread.sleep(1000);
         // Check that both suggestions are displayed.
         onView(withText("South China Sea"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
@@ -107,11 +108,12 @@ public class MultiWindowTest {
     }
 
     @Test
-    public void autoCompleteTextView_oneSuggestion() {
+    public void autoCompleteTextView_oneSuggestion() throws InterruptedException {
+        Thread.sleep(700);
         // Type "South" to trigger one suggestion.
         onView(withId(R.id.auto_complete_text_view))
                 .perform(typeTextIntoFocusedView("South "), closeSoftKeyboard());
-
+        Thread.sleep(1000);
         // Should be displayed
         onView(withText("South China Sea"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
@@ -124,34 +126,36 @@ public class MultiWindowTest {
     }
 
     @Test
-    public void autoCompleteTextView_clickAndCheck() {
+    public void autoCompleteTextView_clickAndCheck() throws InterruptedException {
+        Thread.sleep(700);
         // Type text into the text view
         onView(withId(R.id.auto_complete_text_view))
                 .perform(typeTextIntoFocusedView("South "), closeSoftKeyboard());
-
+        Thread.sleep(700);
         // Tap on a suggestion.
         onView(withText("South China Sea"))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                 .perform(click());
-
+        Thread.sleep(700);
         // By clicking on the auto complete term, the text should be filled in.
         onView(withId(R.id.auto_complete_text_view))
                 .check(matches(withText("South China Sea")));
     }
 
     @Test
-    public void autoCompleteTextView_onDataClickAndCheck() {
+    public void autoCompleteTextView_onDataClickAndCheck() throws InterruptedException {
+        Thread.sleep(500);
         // NB: The autocompletion box is implemented with a ListView, so the preferred way
         // to interact with it is onData(). We can use inRoot here too!
         onView(withId(R.id.auto_complete_text_view))
                 .perform(typeText("S"), closeSoftKeyboard());
-
+        Thread.sleep(700);
         // This is useful because some of the completions may not be part of the View Hierarchy
         // unless you scroll around the list.
         onData(allOf(instanceOf(String.class), is("Baltic Sea")))
                 .inRoot(withDecorView(not(is(mActivity.getWindow().getDecorView()))))
                 .perform(click());
-
+        Thread.sleep(700);
         // The text should be filled in.
         onView(withId(R.id.auto_complete_text_view))
                 .check(matches(withText("Baltic Sea")));
