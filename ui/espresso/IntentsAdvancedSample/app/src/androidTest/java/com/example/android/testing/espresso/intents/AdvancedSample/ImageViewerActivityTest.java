@@ -71,12 +71,13 @@ public class ImageViewerActivityTest {
     }
 
     @Test
-    public void takePhoto_drawableIsApplied() {
+    public void takePhoto_drawableIsApplied() throws InterruptedException {
         // Check that the ImageView doesn't have a drawable applied.
         onView(withId(R.id.imageView)).check(matches(not(hasDrawable())));
-
+        Thread.sleep(1000);
         // Click on the button that will trigger the stubbed intent.
         onView(withId(R.id.button_take_photo)).perform(click());
+        Thread.sleep(1000);
 
         // With no user interaction, the ImageView will have a drawable.
         onView(withId(R.id.imageView)).check(matches(hasDrawable()));
