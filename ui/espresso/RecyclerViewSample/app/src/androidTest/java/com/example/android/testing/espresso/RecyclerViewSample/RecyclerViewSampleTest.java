@@ -50,11 +50,12 @@ public class RecyclerViewSampleTest {
             MainActivity.class);
 
     @Test
-    public void scrollToItemBelowFold_checkItsText() {
+    public void scrollToItemBelowFold_checkItsText() throws InterruptedException {
+        Thread.sleep(700);
         // First scroll to the position that needs to be matched and click on it.
         onView(ViewMatchers.withId(R.id.recyclerView))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(ITEM_BELOW_THE_FOLD, click()));
-
+        Thread.sleep(700);
         // Match the text in an item below the fold and check that it's displayed.
         String itemElementText = mActivityRule.getActivity().getResources().getString(
                 R.string.item_element_text) + String.valueOf(ITEM_BELOW_THE_FOLD);
@@ -62,11 +63,12 @@ public class RecyclerViewSampleTest {
     }
 
     @Test
-    public void itemInMiddleOfList_hasSpecialText() {
+    public void itemInMiddleOfList_hasSpecialText() throws InterruptedException {
+        Thread.sleep(700);
         // First, scroll to the view holder using the isInTheMiddle matcher.
         onView(ViewMatchers.withId(R.id.recyclerView))
                 .perform(RecyclerViewActions.scrollToHolder(isInTheMiddle()));
-
+        Thread.sleep(700);
         // Check that the item has the special text.
         String middleElementText =
                 mActivityRule.getActivity().getResources().getString(R.string.middle);
