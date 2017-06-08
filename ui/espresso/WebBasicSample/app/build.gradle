@@ -21,6 +21,7 @@ android {
       exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
       exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
     }
+    buildToolsVersion '25.0.0'
 }
 
 dependencies {
